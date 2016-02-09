@@ -15,3 +15,11 @@ Analyze dataset “Bike Sharing”. The objective is to explain the bike sharing
 ## [Homework 2](http://www.yurulin.com/class/spring2016_datamining/slides/hw2.pdf)
 
 Analyze dataset "Australian". The objective is to predict whether the client's credit is good or not (the binary variable A15). [Original source](https://archive.ics.uci.edu/ml/datasets/Statlog+(Australian+Credit+Approval)), [data](http://www.yurulin.com/class/spring2016_datamining/data/australian.csv), and [description](http://www.yurulin.com/class/spring2016_datamining/data/australian_description.txt).
+
+## [Homework 3](http://www.yurulin.com/class/spring2016_datamining/slides/hw3.pdf)
+
+Analyze dataset [adult](http://www.yurulin.com/class/spring2016_datamining/data/adult.csv). The objective is to predict the binary target variable salary (TRUE if a person earns more than 50K else FALSE).
+
+Apply different classification techniques (incl. logistic regression, kNN, Naive Bayesian, decision tree, SVM, and Ensemble methods) on this dataset. Use all available predictors in your models.
+
+[Data description](http://www.yurulin.com/class/spring2016_datamining/data/adult_description.txt), [Source](https://archive.ics.uci.edu/ml/datasets/Adult), and [Sample code](http://www.yurulin.com/class/spring2016_datamining/src/hw3sample.R).
