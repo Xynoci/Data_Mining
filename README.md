@@ -11,3 +11,7 @@ For Data Mining Course. Under instruction of [Yu-Ru Lin](http://www.yurulin.com)
 ## [Homework 1](http://www.yurulin.com/class/spring2016_datamining/slides/hw1.pdf)
 
 Analyze dataset “Bike Sharing”. The objective is to explain the bike sharing value in terms of the provided possible influential factors. [Data](http://www.yurulin.com/class/spring2016_datamining/data/bike.csv) and [description](http://www.yurulin.com/class/spring2016_datamining/data/bike_description.txt).
+
+## [Homework 2](http://www.yurulin.com/class/spring2016_datamining/slides/hw2.pdf)
+
+Analyze dataset "Australian". The objective is to predict whether the client's credit is good or not (the binary variable A15). [Original source](https://archive.ics.uci.edu/ml/datasets/Statlog+(Australian+Credit+Approval)), [data](http://www.yurulin.com/class/spring2016_datamining/data/australian.csv), and [description](http://www.yurulin.com/class/spring2016_datamining/data/australian_description.txt).
