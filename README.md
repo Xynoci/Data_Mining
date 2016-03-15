@@ -23,3 +23,17 @@ Analyze dataset [adult](http://www.yurulin.com/class/spring2016_datamining/data/
 Apply different classification techniques (incl. logistic regression, kNN, Naive Bayesian, decision tree, SVM, and Ensemble methods) on this dataset. Use all available predictors in your models.
 
 [Data description](http://www.yurulin.com/class/spring2016_datamining/data/adult_description.txt), [Source](https://archive.ics.uci.edu/ml/datasets/Adult), and [Sample code](http://www.yurulin.com/class/spring2016_datamining/src/hw3sample.R).
+
+## [Homework 4](http://www.yurulin.com/class/spring2016_datamining/slides/hw4.pdf)
+
+### Task 1: Analyze the data "[stock price](http://archive.ics.uci.edu/ml/datasets/Dow+Jones+Index)"
+
+The objective of the analysis is to group stocks together if they have similar trends in price variance.
+
+[Data description](http://www.yurulin.com/class/spring2016_datamining/data/stock_price_description.txt), and [Source](http://www.yurulin.com/class/spring2016_datamining/data/stock_price.csv).
+
+### Task 2: analyze US Senator Roll Call Data
+
+The objective is to identify and visualize the clustering patterns of senators’ voting activities.
+
+[Data description](http://www.voteview.com/senate101.htm), and [Source](http://www.yurulin.com/class/spring2016_datamining/data/roll_call).
