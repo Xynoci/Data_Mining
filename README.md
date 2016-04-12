@@ -26,15 +26,15 @@ Apply different classification techniques (incl. logistic regression, kNN, Naive
 
 ## [Homework 4](http://www.yurulin.com/class/spring2016_datamining/slides/hw4.pdf)
 
-### Task 1: Analyze the data "[stock price](http://archive.ics.uci.edu/ml/datasets/Dow+Jones+Index)"
+### Task 1
 
-The objective of the analysis is to group stocks together if they have similar trends in price variance.
+Analyze the data "[stock price](http://archive.ics.uci.edu/ml/datasets/Dow+Jones+Index)": The objective of the analysis is to group stocks together if they have similar trends in price variance.
 
 [Data description](http://www.yurulin.com/class/spring2016_datamining/data/stock_price_description.txt), and [Source](http://www.yurulin.com/class/spring2016_datamining/data/stock_price.csv).
 
-### Task 2: analyze US Senator Roll Call Data
+### Task 2
 
-The objective is to identify and visualize the clustering patterns of senators’ voting activities.
+Analyze US Senator Roll Call Data: The objective is to identify and visualize the clustering patterns of senators’ voting activities.
 
 [Data description](http://www.voteview.com/senate101.htm), and [Source](http://www.yurulin.com/class/spring2016_datamining/data/roll_call).
 
@@ -42,14 +42,20 @@ The objective is to identify and visualize the clustering patterns of senators�
 
 You will use the “Reuters”, “last.fm”, and the “movielens” datasets for this assignment.
 
-### Task 1 (Text Mining): analyze the topical clusters from text data (Reuters-21578 R52)
+### Task 1 (Text Mining) 
+
+Analyze the topical clusters from text data (Reuters-21578 R52)
 
 [Data description](http://www.cs.umb.edu/~smimarog/textmining/datasets/), and [Source](http://www.yurulin.com/class/spring2016_datamining/data/hw5_1_dataset/r52.csv).
 
-### Task 2 (Network Analysis): create an artist-artist network and identify the community structure and central nodes.
+### Task 2 (Network Analysis)
+
+Create an artist-artist network and identify the community structure and central nodes.
 
 [Data description](http://grouplens.org/datasets/hetrec-2011/), and [Source](http://www.yurulin.com/class/spring2016_datamining/data/hw5_2_dataset).
 
-### Task 3 (Recommendation): create a recommender system based on the movie rating dataset (This task will take longer time for computation)
+### Task 3 (Recommendation)
+
+Create a recommender system based on the movie rating dataset (This task will take longer time for computation)
 
 [Data description](http://grouplens.org/datasets/hetrec-2011/), and [Source](http://www.yurulin.com/class/spring2016_datamining/data/hw5_3_dataset).
