@@ -82,7 +82,7 @@ a.data <- vector()
 ##### perform classification #####
 my.classifier(ds, cl.name='dtree',do.cv=T)
 par(new = TRUE)
-my.classifier(ds, cl.name='svm',do.cv=T)
+my.classifier(ds, cl.name='svm',do.cv=F)
 par(new = TRUE)
 my.classifier(ds, cl.name='ada',do.cv=T)
 legend("bottomright", legend=name.list, col=col, lwd=3)
@@ -146,8 +146,23 @@ pre.test <- function(dataset, cl.name, r=0.6, prob.cutoff=0.5) {
   pred = prediction(result$prob,result$actual)
   perf = performance(pred, "tpr","fpr")
   plot(perf)
-  #plot(perf, col = rainbow(coln2))
-  #coln2 <- coln2 - 1
+  
+  ## get other measures by using 'performance'
+  get.measure <- function(pred, measure.name='auc') {
+    perf = performance(pred,measure.name)
+    m <- unlist(slot(perf, "y.values"))
+    #     print(slot(perf, "x.values"))
+    #     print(slot(perf, "y.values"))
+    m
+  }
+  err = mean(get.measure(pred, 'err'))
+  accuracy = mean(get.measure(pred, 'acc'))
+  precision = mean(get.measure(pred, 'prec'),na.rm=T)
+  recall = mean(get.measure(pred, 'rec'),na.rm=T)
+  fscore = mean(get.measure(pred, 'f'),na.rm=T)
+  cat('error=',err, 'accuracy=',accuracy, 'precision=',precision, 'recall=',recall,'f-score',fscore,'\n')
+  auc = get.measure(pred, 'auc')
+  cat('auc=',auc,'\n')
 }
 
 do.classification <- function(train.set, test.set, cl.name, verbose=T) {
@@ -155,7 +170,7 @@ do.classification <- function(train.set, test.set, cl.name, verbose=T) {
   ## not binary decisions
   switch(cl.name, 
          dtree = {
-           model = rpart(result~., data=train.set)
+           model = rpart(result~ X0311AvgSum + X0311AvgSD + X0311Count + X0311SourcesSum + X071AvgSD + X1244ArticlesSum, data=train.set)
            if (verbose) {
              # detailed summary of splits
              summary(model) 
@@ -167,17 +182,18 @@ do.classification <- function(train.set, test.set, cl.name, verbose=T) {
              fancyRpartPlot(model, sub="Decision Tree")
            }           
            
-           if (1) { 
+           if (0) { 
              # here we use the default tree, you should evaluate different size of tree prune the tree  
              ## 1. minimum xerror
-             #cut.at <- which.min(model$cptable[,"xerror"])
+             cut.at <- which.min(model$cptable[,"xerror"])
              ## 2. minimum xstd
              # cut.at <- which.min(model$cptable[,"xstd"])
              ## 3. A rule of thumb is to choose the lowest level where the rel_error + xstd < xerror
-             cut.at <- min(which(model$cptable[,"rel error"] + model$cptable[,"xstd"] < model$cptable[,"xerror"]))
+             # cut.at <- min(which(model$cptable[,"rel error"] + model$cptable[,"xstd"] < model$cptable[,"xerror"]))
              pfit <- prune(model, cp = model$cptable[cut.at,"CP"])
              cat('*Tree pruned at level:', cut.at, ', CP:', model$cptable[cut.at,"CP"], '\n')
              printcp(pfit)
+             print(pfit$variable.importance)
              prob = predict(pfit, newdata=test.set)
              ## plot the pruned tree 
              fancyRpartPlot(pfit, sub="Pruned Decision Tree") 
@@ -188,24 +204,22 @@ do.classification <- function(train.set, test.set, cl.name, verbose=T) {
            prob
          },      
          svm = {
-           model = svm(result~., data=train.set, probability=T)
-           if (0) { # fine-tune the model with different kernel and parameters
+           model = svm(result~ X0311AvgSum + X0311AvgSD + X0311Count + X0311SourcesSum + X071AvgSD + X1244ArticlesSum, data=train.set, probability=T)
+           if (1) { # fine-tune the model with different kernel and parameters
              ## evaluate the range of gamma parameter between 0.000001 and 0.1
              ## and cost parameter from 0.1 until 10
              tuned <- tune.svm(result~., data = train.set, 
-                               kernel="radial", 
+                               kernel="linear", 
                                gamma = 10^(-6:-1), cost = 10^(-1:1))
-             #print(summary(tuned))
+             print(summary(tuned))
              gamma = tuned[['best.parameters']]$gamma
              cost = tuned[['best.parameters']]$cost
              model = svm(result~., data = train.set, probability=T, 
-                         kernel="radial", gamma=gamma, cost=cost)                        
+                         kernel="linear", gamma=gamma, cost=cost)                        
            }
            prob = predict(model, newdata=test.set, probability=T)
-           prob = attr(prob,"probabilities")
-           #print(cbind(prob,as.character(test.set$y)))
-           #print(dim(prob))
-           prob = prob[,which(colnames(prob)==1)]/rowSums(prob)
+           # print(cbind(prob,as.character(test.set$result)))
+           # prob = prob[,which(colnames(prob)==1)]/rowSums(prob)
            prob
          },
          ada = {
@@ -232,7 +246,7 @@ k.fold.cv <- function(dataset, cl.name, k.fold=10, prob.cutoff=0.5) {
     cat('\n', k.fold,'-fold CV run',k,cl.name,':',
         '#training:',nrow(train.set),
         '#testing',nrow(test.set),'\n')
-    prob = do.classification(train.set, test.set, cl.name, F)
+    prob = do.classification(train.set, test.set, cl.name, T)
     
     predicted = as.numeric(prob > prob.cutoff)
     actual = test.set$result
@@ -285,7 +299,5 @@ k.fold.cv <- function(dataset, cl.name, k.fold=10, prob.cutoff=0.5) {
 
 library("ggplot2")
 ## IR static
-bar.summary<-summary(as.factor(d$result))
-bar.count<-data.frame(status=c("negative", "positive"), count=bar.summary)
-ggplot(bar.count, aes(x=bar.count$status, y=bar.count$count)) + 
-  labs(list(title="Histogtam of Inflation Rate",x="Status",y="Count"))
+dim(ds)
+ds[1,]
